@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+            <div class="container">
+                <div id="myDIV" class="header">
+                    <h2>My To Do List</h2>
+                    <form action="{% url 'todo:add_todo' %}">
+                        <input type="text" name="todo" placeholder="Title...">
+                        <select name="priority" id="">
+                            <option value="red">RED</option>
+                            <option value="orange">ORANGE</option>
+                            <option value="lightblue">LIGHTBLUE</option>
+                            <option value="green">GREEN</option>
+                        </select>
+                        <button type="submit" class="addBtn">Add</button>
+                    </form>
+                  </div>
+                  
+                  <ul id="myUl">
+                    {% for todo in object_list %}
+                    {% if not todo.doned %}
+                    <li class="{% if todo.priority == 'red' %}red{% elif todo.priority == 'orange' %}orange{% elif todo.priority == 'lightblue' %}lightblue{% else %}green{% endif %}"> 
+                        <a href=""> {{todo.title}}</a> - 
+                        <a href="{% url 'todo:done' todo.id %}">Done</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+          
+                <br><br>
+                <h4>Doned Todos</h4>
+                <ul>
+                    {% for todo in object_list %}
+                    {% if todo.doned %}
+                    <li >
+                        <span style="text-decoration: line-through;">{{todo.title}}</span>
+                        <a href="{% url 'todo:delete' todo.id %}">Delete</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+         </section>
+        </section>
+    </main>
+</body>
+</html>

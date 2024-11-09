@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Todo Form</title>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <div class="form">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
